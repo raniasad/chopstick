@@ -15,6 +15,7 @@ public class Table {
         conchon.start();
         bastide.start();
         // attendre la frappe d’une touche dans la console
+        System.out.println("Tapez <Enter> pour arrêter la table");
         try {
             System.in.read();
         } catch (IOException ex) {

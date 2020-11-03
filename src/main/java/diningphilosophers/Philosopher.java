@@ -22,9 +22,7 @@ public class Philosopher
 
     @Override
     public void run() {
-        while (running) {
-            // ...
-        }
+
     }
 
     // Permet d'interrompre le philosophe "proprement" :
