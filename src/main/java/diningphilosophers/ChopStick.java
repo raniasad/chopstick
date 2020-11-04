@@ -15,19 +15,22 @@ public class ChopStick {
     }
 
     synchronized void take() throws InterruptedException {
-        stickCount = stickCount - 1;
-
-        if (stickCount % 2 != 0) {
+        
+        if (stickCount % 2 == 0) {
             while (this.iAmFree == false) {
                 wait(); // Peut lever InterruptedException
             }
+            stickCount = stickCount - 1;
             assert (this.iAmFree == true);
             this.iAmFree = false;
             System.out.printf("La deuxième baguette est prise" + '\n');
             notifyAll();
 
         } else {
-
+               while (this.iAmFree == false) {
+                wait(); // Peut lever InterruptedException
+            }
+            stickCount = stickCount - 1;
             assert (this.iAmFree == true);
             this.iAmFree = false;
             System.out.printf("La première baguette est prise" + '\n');
@@ -38,9 +41,6 @@ public class ChopStick {
     synchronized void release() throws InterruptedException {
         stickCount = stickCount + 1;
         if (stickCount % 2 != 0) {
-            while (this.iAmFree == true) {
-                wait(); // Peut lever InterruptedException
-            }
             assert (this.iAmFree == false);
             this.iAmFree = true;
             System.out.printf("La deuxième baguette est relachée" + '\n');
