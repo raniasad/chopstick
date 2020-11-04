@@ -1,7 +1,8 @@
 package diningphilosophers;
 
 import java.util.Random;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Philosopher
         extends Thread {
@@ -22,7 +23,16 @@ public class Philosopher
 
     @Override
     public void run() {
-
+        try {
+            this.think();
+            myLeftStick.take();
+            myRightStick.take();
+            this.eat();
+            myLeftStick.release();
+            myRightStick.release();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Philosopher.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     // Permet d'interrompre le philosophe "proprement" :
